@@ -1,6 +1,7 @@
 const {Router}= require('express').Router()
 
 const UserRouter = Router();
+const { UserModel} = require('../db')
 
 UserRouter.post('/Login',function(req,res){
     res.json({

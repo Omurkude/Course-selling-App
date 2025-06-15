@@ -1,5 +1,5 @@
 const {Router} = require('express')
-
+const {CourseModel} = require('../db')
 
 const CourseRouter = Router();
 CourseRouter.get('/Couse/bulk',function(req,res){

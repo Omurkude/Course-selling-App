@@ -1,7 +1,21 @@
 const mongoose = require('mongoose');
+require('dotenv').config()
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MongoURL , {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err);
+    process.exit(1);
+  }
+};
+
+
 const Schema =  mongoose.Schema ;
-
-
 const Objectid = mongoose.Objectid
 
 const User = new Schema ({
@@ -39,8 +53,10 @@ const CourseModel = mongoose.model('course',Course);
 const PurchaseModel = mongoose.model('purchases',Purchase);
 
 module.exports = {
+    connectDB,
     UserModel,
     AdminModel,
     CourseModel,
     PurchaseModel
 }
+

@@ -1,13 +1,17 @@
 const express = require('express');
+const app = express();
+const {connectDB} =require('./db')
 const { UserRouter } = require('./routes/user');
 const { CourseRouter } = require('./routes/cousre');
-const app = express();
-const router  =express.Router()
+const {adminRouter} = require('./routes/admin')
+ 
+
+connectDB();
 
 
 app.use('/api/v1/user',UserRouter);
 app.use('api/v1/cousres',CourseRouter);
-app.use('api/v1/admin',)
+app.use('api/v1/admin',adminRouter)
 
 
 
