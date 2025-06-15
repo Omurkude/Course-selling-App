@@ -9,10 +9,12 @@ const {adminRouter} = require('./routes/admin')
 connectDB();
 
 
-app.use('/api/v1/user',UserRouter);
+app.use('api/v1/user',UserRouter);
 app.use('api/v1/cousres',CourseRouter);
 app.use('api/v1/admin',adminRouter)
 
 
 
-app.listen(3000)
+app.listen(3000 ,function(){
+console.log("backend running on port 3000")
+})

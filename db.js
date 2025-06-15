@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
+const {MONGO_URL} = require('./')
+
+console.log("Mongo URL:", process.env.MONGO_URL);
+
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MongoURL , {
+    await mongoose.connect(process.env.MONGO_URL , {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
@@ -14,9 +18,9 @@ const connectDB = async () => {
   }
 };
 
-
 const Schema =  mongoose.Schema ;
-const Objectid = mongoose.Objectid
+const ObjectId = mongoose.Types.ObjectId
+
 
 const User = new Schema ({
 
@@ -40,11 +44,11 @@ const Course = new Schema({
  description:String,
  price:Number,
  imageUrl :String ,
- creatorId : Objectid
+ creatorId : ObjectId,
 })
 const Purchase = new Schema({
-   userId :Objectid,
-    CourseId :Objectid
+   userId :ObjectId,
+    CourseId :ObjectId
 })
 
 const UserModel =  mongoose.model('Users',User);

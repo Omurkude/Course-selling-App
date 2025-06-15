@@ -1,4 +1,4 @@
-const {Router}= require('express').Router()
+const {Router}= require('express')
 
 const UserRouter = Router();
 const { UserModel} = require('../db')

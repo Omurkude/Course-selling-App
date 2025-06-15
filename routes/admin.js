@@ -19,3 +19,7 @@ adminRouter.get('/Purchases',function(req,res){
         msg :"hello"
     })
 })
+
+module.exports = {
+    adminRouter : adminRouter
+}
