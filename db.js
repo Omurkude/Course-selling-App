@@ -24,7 +24,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 const User = new Schema ({
 
- email : {type:String, unique:true},
+ email : {type:String, unique : true},
  password :String,
  FirstName : String,
  LastName : String

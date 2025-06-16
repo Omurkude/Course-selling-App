@@ -5,19 +5,9 @@ const bcrypt = require('bcrypt')
 const z = require('zod')
 const jwt = require('jsonwebtoken')
 const {ADMIN_JWT_SECRET} = require('../config/configure')
+const {signinbody,signupbody,salt} =require('../config/configure')
 
 
-const signupbody = z.object({
-    email :z.string().email(),
-    password : z.string().min(6).max(20),
-    FirstName : z.string().min(3).max(50),
-    LastName : z.string().min().max(50)
-})
-
-const signinbody = z.object({
-    email :z.string().email(),
-    password : z.string().min(6).max(20),
-})
 
 
 adminRouter.post('/Login', async function(req,res){
@@ -56,7 +46,7 @@ adminRouter.post('/Login', async function(req,res){
 })
 adminRouter.post('/Signup', async function(req,res){
     const response  = signupbody.safeparse(req.body)
-    const salt  = 12 ;
+    
 
     if(!response.success){
         return res.status(400).json({

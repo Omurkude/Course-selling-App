@@ -6,23 +6,11 @@ const { USER_JWT_SECRET} = require('../config/configure')
 
 const UserRouter = Router();
 const { UserModel} = require('../db')
-
-const signupbody = z.object({
-    email :z.string().email(),
-    password : z.string().min(6).max(20),
-    FirstName : z.string().min(3).max(50),
-    LastName : z.string().min().max(50)
-})
-
-const signinbody = z.object({
-    email :z.string().email(),
-    password :z.string().min(6).max(20)
-})
-
+const {signinbody,signupbody,salt} = require('../config/configure')
 
 UserRouter.post('/Signup', async function(req,res){
     const data = signupbody.safeparse(req.body);
-    const salt  = 10 ;
+    
     if(!data.success){
         return res.status(400).json({
             msg : "Invalid Credentials",
@@ -67,7 +55,7 @@ UserRouter.post('/Login', async function(req,res){
        })        
     }
 
-    const passmatch = bcrypt.compare(password ,user.password)
+    const passmatch = bcrypt.compare(password,user.password)
 
     if(passmatch){
 
@@ -77,7 +65,8 @@ UserRouter.post('/Login', async function(req,res){
             token 
         })
 
-    }else{
+    }
+    else{
         return res.status(400).json({
             msg : "InvalidCredentials"
         })

@@ -6,6 +6,7 @@ const { CourseRouter } = require('./routes/cousre');
 const {adminRouter} = require('./routes/admin')
 // index.js
 require('dotenv').config(); // Load all env variables once
+app.use(express.json())
 
  
 
@@ -19,5 +20,5 @@ app.use('api/v1/admin',adminRouter)
 
 
 app.listen(3000 ,function(){
-console.log("backend running on port 3000")
+console.log("backend running on port 3000 ✅")
 })
