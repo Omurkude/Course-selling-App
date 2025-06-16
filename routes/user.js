@@ -1,8 +1,8 @@
 const {Router}= require('express')
 const z = require('zod');
 const bcrypt = require('bcrypt');
-const jwt  = require('jsonwebtoken')
-const Jwtsecret =" userSecret" ;
+const jwt = require('jsonwebtoken')
+const { USER_JWT_SECRET} = require('../config/configure')
 
 const UserRouter = Router();
 const { UserModel} = require('../db')
@@ -37,7 +37,7 @@ UserRouter.post('/Signup', async function(req,res){
 
     await UserModel.create({
         email,
-        hashedpass,
+        password:hashedpass,
         FirstName,
         LastName
     })
@@ -71,7 +71,7 @@ UserRouter.post('/Login', async function(req,res){
 
     if(passmatch){
 
-        const token = jwt.sign( { id: user._id.toString() },Jwtsecret);
+        const token = jwt.sign( { id: user._id.toString() }, USER_JWT_SECRET);
         return res.status(200).json({
             msg: "LoggedIn",
             token 

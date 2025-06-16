@@ -4,6 +4,9 @@ const {connectDB} =require('./db')
 const { UserRouter } = require('./routes/user');
 const { CourseRouter } = require('./routes/cousre');
 const {adminRouter} = require('./routes/admin')
+// index.js
+require('dotenv').config(); // Load all env variables once
+
  
 
 connectDB();
